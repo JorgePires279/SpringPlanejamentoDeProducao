@@ -38,7 +38,7 @@ public class OperadorService {
 
   public OperadorDto createOperador(CreateOperadorDto operadorDto) {
     if (!tiposPermitidos.contains(operadorDto.email())) {
-      throw new RequisicaoErradaException("email do operador inválido");
+      throw new RequisicaoErradaException("Email do operador inválido");
     }
 
     operadorRepository.findByNome(operadorDto.nome()).ifPresent(
@@ -60,7 +60,7 @@ public class OperadorService {
     if (operadorDto.salario() != null) operador.setSalario(operadorDto.salario());
     if (operadorDto.dataNascimento() != null) operador.setDataNascimento(operadorDto.dataNascimento());
     if (!tiposPermitidos.contains(operador.getEmail())) {
-      throw new RequisicaoErradaException("Tipo de operador inválido");
+      throw new RequisicaoErradaException("Email de operador inválido");
     }
 
     operadorRepository.findByNome(operador.getNome()).ifPresent(

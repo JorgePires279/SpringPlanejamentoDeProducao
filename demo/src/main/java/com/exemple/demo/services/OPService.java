@@ -50,17 +50,7 @@ public class OPService {
 
         preencherDadosAdicionais(op, opDto.quantidade());
 
-        OP savedOp = opRepository.save(op);
-    
-        return new OPDto(
-            savedOp.getId(),
-            savedOp.getTipo(),
-            savedOp.getProduto(),
-            op.getNomeProduto(),
-            savedOp.getQuantidade(),
-            savedOp.getTempoProducao(),
-            savedOp.getCustoMPProduto()
-        );
+        return opMapper.toDto(opRepository.save(op));
     }
 
     public OPDto updateOP(Integer id, OPDto opDto) {
@@ -74,17 +64,7 @@ public class OPService {
     
         preencherDadosAdicionais(op, opDto.quantidade());
     
-        OP savedOp = opRepository.save(op);
-    
-        return new OPDto(
-            savedOp.getId(),
-            savedOp.getTipo(),
-            savedOp.getProduto(),
-            op.getNomeProduto(),
-            savedOp.getQuantidade(),
-            savedOp.getTempoProducao(),
-            savedOp.getCustoMPProduto()
-        );
+        return opMapper.toDto(opRepository.save(op));
     }
 
     public OPDto deleteOP(Integer id) {

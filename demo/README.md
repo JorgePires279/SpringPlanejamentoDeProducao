@@ -578,10 +578,12 @@ Respostas de erro:
 * `404` - Operador não encontrado;
 * `409` - Operador em uso;
 
-#### melhoria para apresentação
+### melhoria para apresentação
 
 não poder editar alguma coisa que está sendo usado; tem que dar erro;
 peguntou dobre o dto de alguma coisa;
 cascade
 relacionamento bydirecional;
 regra de negocio o meu tem;
+explicar o que é record;
+como mapeia os erros;

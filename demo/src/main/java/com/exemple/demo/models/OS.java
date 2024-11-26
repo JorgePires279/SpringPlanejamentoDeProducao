@@ -34,8 +34,6 @@ public class OS {
     this.tempoDeExecucao = Duration.ofSeconds(tempoDeExecucaoEmSegundos);
   }
 
-  // Getters e Setters
-
   public Integer getId() {
     return id;
   }
