@@ -103,7 +103,7 @@ Respostas de erro:
 * `404` - Operador não encontrado; ** Se não houver Operador cadastrado com a "id" enviada.
 
 #### `GET /oss/{id}`
-Lista uma semente específica pelo `id`.
+Lista uma os específica pelo `id`.
 
 Resposta:
 ````json
@@ -207,7 +207,7 @@ Respostas de erro:
 
 #### `DELETE /oss/{id}`
 
-Deleta uma semente específica pelo `id`.
+Deleta uma OS específica pelo `id`.
 
 Corpo da Resposta:
 ````json
