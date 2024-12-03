@@ -1,6 +1,6 @@
 # Avaliação N3 - Documentação do projeto 
 
-Este projeto foca no gerenciamento inicial de um setor de Produção de uma Industria, permite o cadastro de Ordens de Produção (OP), e ordens de Ordens de Serviço (OS), produtos e operadores. Após o cadastro devido da OS, a aplicação devolve o feedback de produtividade e demais informações de produto, operador e OP.
+Este projeto foca no gerenciamento inicial de um setor de Produção de uma Industria, permite o cadastro de Ordens de Produção (OP), e  Ordens de Serviço (OS), produtos e operadores. Após o cadastro devido da OS, a aplicação devolve o feedback de produtividade e demais informações de produto, operador e OP.
 
 ## Executando
 
@@ -10,16 +10,16 @@ Para executar o projeto:
 
 ## Tecnologias Utilizadas
 
+* Maven
 * Spring Boot
 * Spring Data JPA
 * H2 DataBase
 * Docker
-* Maven
 * Render
-  -https://springplanejamentodeproducao.onrender.com/operadores
-  -https://springplanejamentodeproducao.onrender.com/produtos
-  -https://springplanejamentodeproducao.onrender.com/oss
-  -https://springplanejamentodeproducao.onrender.com/ops
+  * https://springplanejamentodeproducao.onrender.com/operadores
+  * https://springplanejamentodeproducao.onrender.com/produtos
+  * https://springplanejamentodeproducao.onrender.com/oss
+  * https://springplanejamentodeproducao.onrender.com/ops
 
 ## Recursos
 
@@ -30,7 +30,9 @@ Para executar o projeto:
 
 ## Regras de Negócio
 
-* Os produtos contam com tempo esperado de produção para futuro calculo de prosutividade na OS;
+* Com o atibuto custoMP, inserido no Produto, multiplicado pela quantidade da OS, é Calculado o custoMPProducao na OP;
+* Com o atibuto tempoProcucao, inserido no Produto, e, o atributo tempoExecução inserido na OS, é calculado a produtividade;
+* Os produtos contam com tempo esperado de produção para futuro calculo de produtividade na OS;
 * Os produtos tem custo de MP para calculo de custo total da ordem de produção;
 * Os operadsores tem data de nascimento que tem ser inferior a data atual, não pode estar no futuro;
 * Os operadores tem que ter formato de email valido;
@@ -42,12 +44,43 @@ Para executar o projeto:
 ## Rotas
 
 ### OS
-#### OS `GET /oss[?tipo=:tipo]`
+
+#### `GET /oss/paginacao?page=0&size=1`
+`page é a pagina selecionada`
+`size é o numero de pagina por elemento`
+
+Resposta:
+````json
+{
+	"conteudoPorPagina": [
+		{
+      "id": 3,
+      "tipo": "parcial",
+      "op": 1,
+      "quantidadeOp": 1,
+      "quantidadeOS": 1,
+      "idProduto": 1,
+      "nomeProduto": "Caminhão",
+      "idOperador": 1,
+      "nomeOperador": "João",
+      "tempoDeExecucao": "PT13H53M20S",
+      "produtividade": "A produtividade da OS foi: 20,00 %"
+		}
+	],
+	"totalElementos": 5,
+	"totalDePaginas": 5,
+	"paginasAtual": "[0], 1, 2, 3, 4"
+}
+````
+
+Respostas de erro:
+* `400` - "Não há OS's disponíveis na página solicitada.";
+
+#### OS `GET /oss/tipo/{tipo}
 Lista todas as OS's disponíveis.Filtra pela `tipo` se for informado.
 
-
-
-Resposta
+Resposta:
+````json
 {
 	"id": 3,
 	"tipo": "parcial",
@@ -94,22 +127,23 @@ Respostas de erro:
 
 #### `POST /oss`
 
-Cadastra uma nova semente.
+Cadastra uma nova OS.
 
 Corpo da Mensagem:
 ````json
-[
-  {
+
+{
   "tipo": "parcial",
   "op": 1,
   "quantidadeProduzida": 1,
   "idProduto": 1,
   "idOperador": 1,
   "tempoDeExecucaoEmSegundos": 50000
-}
-]
+}````
 
-Resposta
+
+Corpo da Resposta:
+````json
 {
 	"id": 3,
 	"tipo": "parcial",
@@ -130,6 +164,7 @@ Respostas de erro:
 * `404` - Produto não encontrado; ** Se não houver produto cadastrado com a "id" enviada.
 * `404` - OP não encontrada; ** Se não houver OP cadastrado com a "id" enviada.
 * `404` - Operador não encontrado; ** Se não houver Operador cadastrado com a "id" enviada.
+* `409` - Quantidade de OS não pode ser maior que a quantidade da OP
 
 #### `PATCH /oss/{id}`
 
@@ -198,7 +233,34 @@ Respostas de erro:
 
 ### OP
 
-#### `GET /ops[?tipo=:tipo]`
+#### `GET /ops/paginacao?page=0&size=1`
+`page é a pagina selecionada`
+`size é o numero de pagina por elemento`
+
+Resposta:
+````json
+{
+	"conteudoPorPagina": [
+		{
+      "id": 1,
+      "tipo": "interna",
+      "produto": 1,
+      "nomeProduto": "Caminhão11111",
+      "quantidade": 1,
+      "tempoProducao": "PT2H46M39S",
+      "custoMPProduto": 50000.00
+		}
+	],
+	"totalElementos": 5,
+	"totalDePaginas": 5,
+	"paginasAtual": "[0], 1, 2, 3, 4"
+}
+````
+
+Respostas de erro:
+* `400` - "Não há OP's disponíveis na página solicitada.";
+
+#### `GET /ops/tipo/{tipo}`
 Lista todas as OP's disponíveis. Filtra pela `tipo` se for informado.
 
 Resposta:
@@ -335,7 +397,32 @@ Respostas de erro:
 
 ### Produtos
 
-#### `GET /produtos[?tipo=:tipo]`
+#### `GET /produtoss/paginacao?page=0&size=1`
+`page é a pagina selecionada`
+`size é o numero de pagina por elemento`
+
+Resposta:
+````json
+{
+	"conteudoPorPagina": [
+		{
+      "id": 1,
+      "nome": "Caminhão",
+      "tipo": "outros",
+      "tempoProducao": "PT2H46M39S",
+      "custoMP": 999.00
+		}
+	],
+	"totalElementos": 5,
+	"totalDePaginas": 5,
+	"paginasAtual": "[0], 1, 2, 3, 4"
+}
+````
+
+Respostas de erro:
+* `400` - "Não há Produtos disponíveis na página solicitada.";
+
+#### `GET /produtos/tipo/{tipo}`
 Lista todas as produtos disponíveis. Filtra pela `tipo` se for informado.
 
 Resposta:
@@ -353,7 +440,7 @@ Resposta:
 
 Respostas de erro:
 * `400` - `tipo` inválido;
-* `404` - Produto não encontrado;
+* `404` - Produto não encontrado para este tipo;
 
 #### `GET /produtos/{id}`
 Lista uma produto específica pelo `id`.
@@ -402,8 +489,9 @@ Corpo da Resposta:
 
 Respostas de erro:
 * `400` - Tipo inválido;
-* `404` - Produto não encontrado;
+* `400` - O tempo de produção deve ser superior a 1 minuto;
 * `409` - Produto já cadastrada;
+
 
 #### `PATCH /produtos/{id}`
 
@@ -459,25 +547,30 @@ Respostas de erro:
 
 ### Operadores
 
-#### `GET /operadores[?tipo=:email]`
-Lista todas os operadores disponíveis. Filtra pela `email` se for informado.
+#### `GET /operadores/paginacao?page=0&size=1`
+`page é a pagina selecionada`
+`size é o numero de pagina por elemento`
 
 Resposta:
 ````json
-[
-  {
-    "id": 1,
-    "nome": "João",
-    "email": "jorge@dominio",
-    "salario": 5997.00,
-    "dataNascimento": "1999-06-22"
-  }
-]
+{
+	"conteudoPorPagina": [
+		{
+      "id": 1,
+      "nome": "João",
+      "email": "jorge@dominio",
+      "salario": 5997.00,
+      "dataNascimento": "1999-06-22"
+		}
+	],
+	"totalElementos": 5,
+	"totalDePaginas": 5,
+	"paginasAtual": "[0], 1, 2, 3, 4"
+}
 ````
 
 Respostas de erro:
-* `400` - `tipo` inválido;
-* `204` - Nenhuma operador encontrado;
+* `400` - "Não há Operadores disponíveis na página solicitada.";
 
 #### `GET /operadores/{id}`
 Lista uma operador específica pelo `id`.
@@ -525,9 +618,8 @@ Corpo da Resposta:
 ````
 
 Respostas de erro:
-* `400` - tipo inválido;
-* `400` - A data de nascimento deve ser anterior à data atual
-* `404` - Operadore não encontrado;
+* `400` - A data de nascimento deve ser anterior à data atual;
+* `400` - O salário deve ser no máximo 99999;
 * `409` - Operadore já cadastrada;
 
 #### `PATCH /operadores/{id}`
@@ -557,6 +649,7 @@ Corpo da Resposta:
 Respostas de erro:
 * `400` - tipo inválido;
 * `400` - A data de nascimento deve ser anterior à data atual
+* `400` - O salário deve ser no máximo 99999;
 * `404` - Operadore não encontrado;
 * `409` - Operadore já cadastrada;
 
@@ -581,15 +674,3 @@ Respostas de erro:
 * `400` - `id` inválido;
 * `404` - Operador não encontrado;
 * `409` - Operador em uso;
-
-### melhoria para apresentação
-
-não poder editar alguma coisa que está sendo usado; tem que dar erro;
-peguntou dobre o dto de alguma coisa;
-cascade
-relacionamento bydirecional;
-regra de negocio o meu tem;
-explicar o que é record;
-como mapeia os erros;
-colocar o bauixo
-1. Rode o comando `docker compose up -d`  na raiz do projeto. 

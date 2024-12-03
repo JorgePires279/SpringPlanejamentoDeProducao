@@ -1,0 +1,42 @@
+http://localhost:8080/operadores
+
+{
+	"nome": "Luís Fernando Farias",
+  "email": "lost@@gmail.com",
+  "salario": 2499.00,
+	"dataNascimento": "1997-04-07"
+}
+
+http://localhost:8080/produtos
+
+{
+  "nome": "Controle",
+  "tipo": "outros",
+  "tempoProducaoEmSegundos": 60,
+  "custoMP": 9990.00
+}
+
+http://localhost:8080/oss
+
+{
+  "tipo": "inteira",
+  "op": 3,
+  "quantidadeProduzida": 1,
+  "idProduto": 4,
+  "idOperador": 4,
+  "tempoDeExecucaoEmSegundos": 120
+}
+
+http://localhost:8080/ops
+
+{
+  "tipo": "externa",
+  "produto": 5,
+  "quantidade": 3
+}
+
+
+http://localhost:8080/oss/paginacao?page=2&size=1
+
+https://springplanejamentodeproducao.onrender.com/oss
+https://springplanejamentodeproducao.onrender.com/oss/paginacao?page=0&size=1

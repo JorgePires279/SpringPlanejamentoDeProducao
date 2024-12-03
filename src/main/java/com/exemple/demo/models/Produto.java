@@ -2,12 +2,13 @@ package com.exemple.demo.models;
 
 import java.math.BigDecimal;
 import java.time.Duration;
-
+import java.util.List;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 
 import com.exemple.demo.converters.DurationConverter;
@@ -33,6 +34,9 @@ public class Produto {
     this.tempoProducao = tempoProducao;
     this.custoMP = custoMP;
   }
+
+  @OneToMany(mappedBy = "produto")
+  private List<OP> operacoes;
 
   public Integer getId() {
     return id;
