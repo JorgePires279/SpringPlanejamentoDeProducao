@@ -119,7 +119,8 @@ Resposta:
 	"nomeOperador": "João",
 	"tempoDeExecucao": "PT13H53M20S",
 	"produtividade": "A produtividade da OS foi: 20,00 %"
-}````
+}
+````
 
 
 Respostas de erro:
@@ -139,7 +140,8 @@ Corpo da Mensagem:
   "idProduto": 1,
   "idOperador": 1,
   "tempoDeExecucaoEmSegundos": 50000
-}````
+}
+````
 
 
 Corpo da Resposta:
@@ -156,7 +158,8 @@ Corpo da Resposta:
 	"nomeOperador": "João",
 	"tempoDeExecucao": "PT13H53M20S",
 	"produtividade": "A produtividade da OS foi: 20,00 %"
-}````
+}
+````
 
 Respostas de erro:
 * `400` - `tipo` inválido;
