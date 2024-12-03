@@ -7,8 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 
 import com.exemple.demo.converters.DurationConverter;
@@ -20,8 +18,6 @@ public class OP {
     @SequenceGenerator(name = "op_seq", sequenceName = "op_seq", initialValue = 1, allocationSize = 1)
     private Integer id;
     private String tipo;
-    @ManyToOne
-    @JoinColumn(name = "produto")
     private Integer produto;
     private String nomeProduto;
     private Integer quantidade;

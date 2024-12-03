@@ -1,15 +1,11 @@
 package com.exemple.demo.models;
 
 import java.time.Duration;
-import java.util.List;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 
 import com.exemple.demo.converters.DurationConverter;
@@ -22,17 +18,11 @@ public class OS {
   @SequenceGenerator(name = "os_seq", sequenceName = "os_seq", initialValue = 1, allocationSize = 1)
   private Integer id;
   private String tipo;
-  @ManyToOne
-  @JoinColumn(name = "OP")
   private Integer op;
   private Integer quantidadeOp;
   private Integer quantidadeOS;
-  @ManyToOne
-  @JoinColumn(name = "idProduto")
   private Integer idProduto;
   private String nomeProduto;
-  @ManyToOne
-  @JoinColumn(name = "idOperador")
   private Integer idOperador;
   private String nomeOperador;
   @Convert(converter = DurationConverter.class)
@@ -49,9 +39,6 @@ public class OS {
     this.idOperador = idOperador;
     this.tempoDeExecucao = Duration.ofSeconds(tempoDeExecucaoEmSegundos);
   }
-
-  @OneToMany(mappedBy = "ops")
-  private List<OS> ordensDeServico;
 
   public Integer getId() {
     return id;

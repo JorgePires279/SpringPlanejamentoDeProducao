@@ -2,12 +2,10 @@ package com.exemple.demo.models;
 
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
@@ -30,9 +28,6 @@ public class Operador {
     this.salario = salario;
     this.dataNascimento = dataNascimento;
   }
-
-    @OneToMany(mappedBy = "operador")
-    private List<OS> ordensDeServico;
 
   public Integer getId() {
     return id;
