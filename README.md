@@ -16,6 +16,10 @@ Para executar o projeto:
 * Docker
 * Maven
 * Render
+  -https://springplanejamentodeproducao.onrender.com/operadores
+  -https://springplanejamentodeproducao.onrender.com/produtos
+  -https://springplanejamentodeproducao.onrender.com/oss
+  -https://springplanejamentodeproducao.onrender.com/ops
 
 ## Recursos
 
