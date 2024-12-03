@@ -141,12 +141,12 @@ public class OSService {
     osDto.setNomeProduto(nomeProduto);
     osDto.setNomeOperador(nomeOperador);
     osDto.setQuantidadeOp(quantidadeOp);
-    osDto.setProdutividade(String.format("A produtividade da OS foi: %.2f %%", produtividade));
+    osDto.setProdutividade(String.format("A produtividade da OS foi: %.2f%%", produtividade));
   }
 
-  private double calcularProdutividade(double tempoDeExecucao, Integer quantidadeOS, double tempoProducao) {
+  private double calcularProdutividade(double tempoDeExecucao, Integer quantidadeOp, double tempoProducao) {
   
-    double produtiv = ((tempoProducao * quantidadeOS) / (tempoDeExecucao * quantidadeOS) * 100);
+    double produtiv = (((tempoProducao * quantidadeOp) / (tempoDeExecucao)) * 100);
 
     return produtiv;
   }
