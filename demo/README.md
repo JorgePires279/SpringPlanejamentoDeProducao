@@ -6,7 +6,7 @@ Este projeto foca no gerenciamento inicial de um setor de Produção de uma Indu
 
 Para executar o projeto:
 
-1. Rode o comando `docker compose up -d` na raiz do projeto.
+1.  Rode o comando `docker compose up -d`  na raiz do projeto.
 
 ## Tecnologias Utilizadas
 
@@ -587,3 +587,5 @@ relacionamento bydirecional;
 regra de negocio o meu tem;
 explicar o que é record;
 como mapeia os erros;
+colocar o bauixo
+1. Rode o comando `docker compose up -d`  na raiz do projeto. 

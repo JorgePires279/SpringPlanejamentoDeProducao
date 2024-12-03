@@ -2,7 +2,7 @@ package com.exemple.demo.dtos;
 
 import java.math.BigDecimal;
 import java.sql.Date;
-import jakarta.validation.constraints.Email;
+
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -14,7 +14,6 @@ public record CreateOperadorDto(
   String nome,
   
   @NotBlank(message = "O email não pode ser vazio")
-  @Email(message = "O email deve ser válido")
   String email,
   
   @Min(value = 256, message = "O salário deve ser no mínimo 256")

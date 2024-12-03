@@ -2,8 +2,8 @@ package com.exemple.demo.exceptions;
 
 import org.springframework.http.HttpStatus;
 
-public class RequisicaoErradaException extends ServiceException{
-  public RequisicaoErradaException(String message) {
+public class ErroNaoEncontradoException extends ExceptionResponse{
+  public ErroNaoEncontradoException(String message) {
     super(message, HttpStatus.NOT_FOUND);
   }  
 }

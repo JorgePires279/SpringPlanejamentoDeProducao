@@ -2,6 +2,8 @@ package com.exemple.demo.controllers;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.exemple.demo.dtos.CreateOSDto;
 import com.exemple.demo.dtos.OSDto;
+import com.exemple.demo.dtos.PaginacaoDto;
 import com.exemple.demo.services.OSService;
 import jakarta.validation.Valid;
 
@@ -26,6 +29,18 @@ public class OSController {
 
     public OSController(OSService osService){
         this.osService = osService;
+    }
+
+    @GetMapping("/tipo/{tipo}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<OSDto> getOSByTipo(@PathVariable String tipo) {
+        return osService.getOSByTipo(tipo);
+    }
+    
+    @GetMapping("/paginacao")
+    public PaginacaoDto<OSDto> getOS(Pageable pageable) {
+        Page<OSDto> page = osService.getOS(pageable);
+        return new PaginacaoDto<>(page);
     }
 
     @GetMapping

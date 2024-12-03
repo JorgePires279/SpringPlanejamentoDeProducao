@@ -1,7 +1,14 @@
 package com.exemple.demo.models;
 
-import jakarta.persistence.*;
 import java.time.Duration;
+
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+
 import com.exemple.demo.converters.DurationConverter;
 
 @Entity
@@ -17,7 +24,7 @@ public class OS {
   private Integer quantidadeOS;
   private Integer idProduto;
   private String nomeProduto;
-  private Integer idOperador;
+  private Integer idOperador; // quero que essa seja a fk
   private String nomeOperador;
   @Convert(converter = DurationConverter.class)
   private Duration tempoDeExecucao;
